@@ -1,0 +1,46 @@
+{
+  "name": "Ananya Sharan",
+  "title": "Bachelor of Management Studies Student",
+  "about": "A strong background in management and marketing is demonstrated, showcasing skills in strategic planning and execution. Leadership roles in student organizations have been successfully undertaken, reflecting a commitment to organizational success.",
+  "skills": [
+    "Basic SQL",
+    "Google Analytics",
+    "Microsoft Excel",
+    "HTML",
+    "Gmail"
+  ],
+  "work": [
+    {
+      "company": "Startup Wasnot Social media agency",
+      "role": "Lead Manager",
+      "dates": "01/2023 - 07/2023",
+      "bullets": [
+        "Converted multiple clients and managed operational processes to drive efficiency and results",
+        "Coordinated with different departments to improve clients engagement and retention",
+        "Connected with foreign clients to generate leads"
+      ]
+    },
+    {
+      "company": "PG View Company",
+      "role": "Intern - Sales and Marketing",
+      "dates": "01/2023 - 03/2023",
+      "bullets": [
+        "Contributed to a 10% boost in engagement by assisting in marketing strategy development",
+        "Conducted market research to identify customer needs and engaged clients and prospects",
+        "Supported the development of promotional campaigns and sales presentations"
+      ]
+    },
+    {
+      "company": "Estrange Aurora",
+      "role": "HR Intern",
+      "dates": "06/2022 - 07/2022",
+      "bullets": [
+        "Screened over 150 resumes and coordinated interviews during recruitment drives",
+        "Maintained and updated employee records for 50 employees, ensuring data accuracy and confidentiality",
+        "Supported onboarding activities, including preparation of joining kits and documentation",
+        "Optimized marketing campaigns, improving ROI by 15% using Google Analytics insights"
+      ]
+    }
+  ],
+  "projects": []
+}
