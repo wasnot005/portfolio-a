@@ -8,30 +8,49 @@ export default function Upload() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!file) return;
-    setBusy(true);
 
+    setBusy(true);
     const body = new FormData();
     body.append("resume", file);
 
+    console.log("DEBUG: Uploading file", file);
     const res = await fetch("/api/process-resume", { method: "POST", body });
-  const json = await res.json();
-  setBusy(false);
-  if (res.ok) {
-    localStorage.setItem("profile", JSON.stringify(json));
-    Router.push("/profile");
-  } else {
-    alert("Error generating profile");
-  }
+    let html = "";
+    let profile = null;
+    try {
+      const json = await res.json();
+      html = json.html;
+      profile = json.profile;
+      console.log("DEBUG: Received response from /api/process-resume", json);
+    } catch (err) {
+      console.error("DEBUG: Error parsing response JSON", err);
+    }
+    setBusy(false);
+
+    if (res.ok && html) {
+      localStorage.setItem("siteHtml", html);
+      if (profile) {
+        localStorage.setItem("profile", JSON.stringify(profile));
+      }
+      console.log("DEBUG: Saved HTML and profile to localStorage, redirecting to /site");
+      Router.push("/site");
+    } else {
+      alert("Error: portfolio not generated");
+      console.error("DEBUG: Error - portfolio not generated. res.ok:", res.ok, "html:", html);
+    }
   }
 
   return (
     <main className="prose mx-auto p-8">
       <h1>Upload your résumé</h1>
-      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
-          type="file" name="resume"
+          type="file"
           accept=".pdf"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
+          onChange={(e) => {
+            setFile(e.target.files?.[0] || null);
+            console.log("DEBUG: File selected", e.target.files?.[0]);
+          }}
           required
         />
         <button className="btn-primary ml-4" disabled={!file || busy}>

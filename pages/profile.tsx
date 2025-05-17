@@ -5,10 +5,16 @@ export default function Profile() {
 
   useEffect(() => {
     const stored = localStorage.getItem("profile");
+    console.log("DEBUG: Loaded profile from localStorage:", stored);
     if (stored) setData(JSON.parse(stored));
   }, []);
 
-  if (!data) return <p className="p-8">No profile found. Please upload your résumé first.</p>;
+  if (!data) {
+    console.log("DEBUG: No profile data found.");
+    return <p className="p-8">No profile found. Please upload your résumé first.</p>;
+  }
+
+  console.log("DEBUG: Rendering profile data:", data);
 
   return (
     <main className="prose mx-auto p-8">
