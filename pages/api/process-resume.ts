@@ -68,18 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error: "Failed to process resume", details: (err as Error).message });
     }
 
-    // 3 save so the front-end can read it instantly
-    try {
-      if (!fs.existsSync("public")) {
-        fs.mkdirSync("public");
-      }
-      fs.writeFileSync("public/profile.json", JSON.stringify(profile, null, 2));
-    } catch (err) {
-      console.error("Failed to save profile:", err);
-      return res.status(500).json({ error: "Failed to save profile", details: (err as Error).message });
-    }
-
-    res.status(200).json({ ok: true });
+    return res.status(200).json(profile);
   } catch (err) {
     console.error("Unexpected error:", err);
     res.status(500).json({ error: "Unexpected server error", details: (err as Error).message });

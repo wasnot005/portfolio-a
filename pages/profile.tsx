@@ -1,11 +1,14 @@
-import useSWR from "swr";
-const fetcher = (u: string) => fetch(u).then(r => r.json());
+import { useEffect, useState } from "react";
 
 export default function Profile() {
-  const { data, error } = useSWR("/profile.json", fetcher);
+  const [data, setData] = useState<any | null>(null);
 
-  if (error) return <p className="p-8">Failed to load profile.</p>;
-  if (!data)  return <p className="p-8">Loading…</p>;
+  useEffect(() => {
+    const stored = localStorage.getItem("profile");
+    if (stored) setData(JSON.parse(stored));
+  }, []);
+
+  if (!data) return <p className="p-8">No profile found. Please upload your résumé first.</p>;
 
   return (
     <main className="prose mx-auto p-8">

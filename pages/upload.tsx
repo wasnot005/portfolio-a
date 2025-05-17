@@ -14,8 +14,14 @@ export default function Upload() {
     body.append("resume", file);
 
     const res = await fetch("/api/process-resume", { method: "POST", body });
-    setBusy(false);
-    res.ok ? Router.push("/profile") : alert("Error. Check console.");
+  const json = await res.json();
+  setBusy(false);
+  if (res.ok) {
+    localStorage.setItem("profile", JSON.stringify(json));
+    Router.push("/profile");
+  } else {
+    alert("Error generating profile");
+  }
   }
 
   return (
